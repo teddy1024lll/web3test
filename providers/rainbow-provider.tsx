@@ -2,14 +2,14 @@
 
 import { getDefaultConfig, RainbowKitProvider } from '@rainbow-me/rainbowkit'
 import { WagmiProvider } from 'wagmi'
-import { mainnet, polygon, optimism, arbitrum, base } from 'wagmi/chains'
+import { mainnet, polygon, optimism, arbitrum, base, sepolia } from 'wagmi/chains'
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
 import '@rainbow-me/rainbowkit/styles.css'
 
-const config = getDefaultConfig({
+export const config = getDefaultConfig({
   appName: 'My dApp',
   projectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID || 'demo-project-id',
-  chains: [mainnet, polygon, optimism, arbitrum, base],
+  chains: [sepolia],
   ssr: true, // 如果你的 dApp 使用服务端渲染（SSR）
 })
 

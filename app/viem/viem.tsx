@@ -150,8 +150,7 @@ async function transETH(toAddress: string, amount: string) {
     }
 }
 const tokenAddress = '0x85166220421C86B90a630E496840d6C38aa7455B';
-async function teddyCoinBalance(userAddress: string) {
-
+async function teddyCoinBalance(userAddress: string) { 
     try {
         // 同时获取余额、小数位数、名称和符号
         const [balance, decimals, name, symbol] = await Promise.all([
