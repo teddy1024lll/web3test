@@ -10,5 +10,5 @@ import HomePage from './homepage';
 import { ZhiyaHome } from './zhiya/zhiyahome';
 
 export default function Home() {
-  return <ZhiyaHome />;
+  return <HomePage />;
 }

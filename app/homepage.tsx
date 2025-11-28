@@ -12,6 +12,10 @@ import { CheckETH_ethers, SendETH_ethers } from './etheres/ETH_ethers';
 import { CheckTDC_ethers, SendTDC_ethers } from './etheres/TDC_ethers';
 import { ListenerEthers } from './etheres/Listener_ethers';
 import { CheckWagmiConfig } from './wagmi/check-config';
+import Wallectprovider from './wallet_sdk/provider/index'
+import { ConnectionButton } from './wallet_sdk/components/connectionButton';
+import coinBaseWallet from './wallet_sdk/connectors/coinBase';
+import metaMaskWallet from './wallet_sdk/connectors/metaMask';
 
 export default function HomePage() {
     const [activeTab, setActiveTab] = useState('sendTDC');
@@ -57,8 +61,14 @@ export default function HomePage() {
                     ))}
                 </div>
                 {/* 钱包连接按钮 */}
-                <div className="ml-4">
-                    <ConnectButton />
+                {/* <ConnectButton /> */}
+                <div className=''>
+                    <Wallectprovider chains={[]} wallets={[
+                        coinBaseWallet,
+                        metaMaskWallet
+                    ]} autoconnect={true}>
+                        <ConnectionButton label={'Connect Wallet'} size={'sm'} />
+                    </Wallectprovider>
                 </div>
             </div>
 
