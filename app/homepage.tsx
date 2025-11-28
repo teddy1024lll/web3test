@@ -39,12 +39,31 @@ export default function HomePage() {
 
         { id: 'wagmi_config', name: 'Wagmi配置', component: <CheckWagmiConfig /> }
     ];
+    const [showDiv, setShowDiv] = useState(false);
 
     return (
         <div className="min-h-screen bg-linear-to-br from-blue-50 to-indigo-100">
+
+            <div className='h-16 w-full bg-white shadow-md flex flex-row items-center justify-between'>
+                <h1 className="flex right-0 text-2xl font-bold text-gray-800 w-64 shrink-0">🚀 DApp钱包</h1>
+                <Wallectprovider chains={[]} wallets={[
+                    coinBaseWallet,
+                    metaMaskWallet
+                ]} autoconnect={true} children={undefined}>
+                </Wallectprovider>
+                <button
+                    className="relative"
+                    onClick={() => setShowDiv((v) => !v)}
+                >
+                    123
+                    {showDiv && (
+                        <div className="absolute right-0   top-full mt-2 w-32 h-32 bg-blue-500 z-10"></div>
+                    )}
+                </button>
+
+            </div>
             {/* 导航栏 */}
             <div className="flex flex-row px-4 py-4 items-center">
-                <h1 className="text-2xl font-bold text-gray-800 w-64 shrink-0">🚀 DApp钱包</h1>
                 <div className="flex flex-wrap justify-center gap-2 flex-1">
                     {tabs.map((tab) => (
                         <Button
@@ -60,16 +79,7 @@ export default function HomePage() {
                         </Button>
                     ))}
                 </div>
-                {/* 钱包连接按钮 */}
-                {/* <ConnectButton /> */}
-                <div className=''>
-                    <Wallectprovider chains={[]} wallets={[
-                        coinBaseWallet,
-                        metaMaskWallet
-                    ]} autoconnect={true}>
-                        <ConnectionButton label={'Connect Wallet'} size={'sm'} />
-                    </Wallectprovider>
-                </div>
+
             </div>
 
             {/* 主要内容区域 */}

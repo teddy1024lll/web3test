@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useWallet } from "../provider/index";
 import { Wallet } from "../types";
+import { WalletModal, WalletModalProps } from "./walletModal";
 
 interface ConnectionButtonProps {
     label: string;
     shouBalance?: boolean;
     size: 'sm' | 'md' | 'lg';
     className?: string;
+    modalProps: WalletModalProps;
     onConnect?: () => void;
     onDisconnect?: () => void;
     onchangeChain?: (chainID: number) => void;
@@ -17,6 +19,7 @@ export const ConnectionButton: React.FC<ConnectionButtonProps> = ({
     shouBalance = false,
     size = 'md',
     className = '',
+    modalProps,
     onConnect,
     onDisconnect,
     onchangeChain,
@@ -36,18 +39,25 @@ export const ConnectionButton: React.FC<ConnectionButtonProps> = ({
     }
     const handDisconnect = async () => {
         try {
-            disconnect() 
+            disconnect()
         } catch (error) {
             console.error("Disconnection failed:", error);
         }
     }
+    const [modalOpen, setModalOpen] = useState(false)
+
     React.useEffect(() => {
     }
     )
     if (!isconnected) {
-        return (<button onClick={() => {
-            openWalletModal();
-        }}>连接钱包</button>)
+        return (
+            <>
+                <button onClick={() => openWalletModal()}>
+                    连接钱包
+                </button>
+                <WalletModal {...modalProps} />
+            </>
+        );
     }
     return (<div className="h-50 w-150 bg-amber-300 border-2 border-amber-950 rounded-2xl shadow-lg flex-col items-center justify-center">
         <h2>已连接</h2>

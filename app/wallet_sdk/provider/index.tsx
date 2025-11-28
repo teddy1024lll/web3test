@@ -1,6 +1,7 @@
 import React, { Children, createContext, useContext, useEffect, useState } from "react";
 import { Wallet, WalletContextValue, WalletProviderProps, WalletState } from "../types";
-import { WalletModal } from "../components/walletModal";
+import { WalletModal, WalletModalProps } from "../components/walletModal";
+import { ConnectionButton } from "../components/connectionButton";
 
 const WallectContext = createContext<WalletContextValue>(
     {
@@ -76,15 +77,26 @@ export const WalletProvider: React.FC<WalletProviderProps> = ({
             //自动连接逻辑
         }
     }, [autoconnect]);
+
+    const _modalProps: WalletModalProps = {
+        isOpen: modalOpen,
+        onClose: () => setModalOpen(false),
+        wallets: wallets,
+        onWalletSelect: (wallet: Wallet) => { value.connect(wallet) },
+        error: new Error(""),
+    };
     return (
         <WallectContext.Provider value={value}>
             {children}
-            <WalletModal isOpen={modalOpen}
+            <ConnectionButton label={'Connect Wallet'} size={'sm'} modalProps={_modalProps} />
+            {/* <WalletModal
+                isOpen={modalOpen}
                 onClose={() => setModalOpen(false)}
                 wallets={wallets}
                 onWalletSelect={(wallet: Wallet) => { value.connect(wallet) }}
-                error={new Error("")} />
-        </WallectContext.Provider >
+                error={new Error("")}
+            /> */}
+        </WallectContext.Provider>
     )
 
 }
